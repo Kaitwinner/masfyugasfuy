@@ -22,6 +22,18 @@ func _physics_process(delta):
 	
 	_get_input()
 	move_and_slide()
+	
+	var angle = (get_global_mouse_position() - global_position).angle()
+	
+	$GunPos.position = Vector2(
+		cos(angle),
+		sin(angle)
+	) * 80.0
+		
+	if ($GunPos.position.x < 0):
+		$GunPos/Gun.scale = Vector2(1.0, -1.0)
+	else:
+		$GunPos/Gun.scale = Vector2(1.0, 1.0)
 
 func _shoot():
 	var angle_vec = (get_global_mouse_position() - global_position).normalized()
